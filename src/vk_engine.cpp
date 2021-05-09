@@ -1,12 +1,20 @@
 ﻿#include <iostream>
 
-#include "vk_engine.h"
-
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_vulkan.h>
 
-#include <vk_types.h>
-#include <vk_initializers.h>
+#include "vk_engine.h"
+
+#define VK_CHECK(x)                                                 \
+	do                                                              \
+	{                                                               \
+		VkResult err = x;                                           \
+		if (err)                                                    \
+		{                                                           \
+			std::cout <<"Detected Vulkan error: " << err << std::endl; \
+			abort();                                                \
+		}                                                           \
+	} while (0)
 
 void VulkanEngine::init()
 {
@@ -22,10 +30,19 @@ void VulkanEngine::init()
 		_windowExtent.height,
 		window_flags
 	);
+
+	//load the core Vulkan structures
+	init_vulkan();
 	
 	//everything went fine
 	_isInitialized = true;
 }
+
+void VulkanEngine::init_vulkan() {
+	vkb::InstanceBuilder builder;
+	// todo
+}
+
 void VulkanEngine::cleanup()
 {	
 	if (_isInitialized) {
