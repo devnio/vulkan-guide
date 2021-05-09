@@ -1,28 +1,28 @@
 ﻿# CMakeList.txt : CMake project for vulkan_guide, include source and define
 # project specific logic here.
-#
-cmake_minimum_required (VERSION 3.8)
 
-project ("vulkan_guide")
+cmake_minimum_required(VERSION 3.15)
 
+project("vulkan-guide")
 
 find_package(Vulkan REQUIRED)
 
 add_subdirectory(third_party)
 
-set (CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/bin")
+set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 add_subdirectory(src)
 
-
-find_program(GLSL_VALIDATOR glslangValidator HINTS /usr/bin /usr/local/bin $ENV{VULKAN_SDK}/Bin/ $ENV{VULKAN_SDK}/Bin32/)
+find_program(
+  GLSL_VALIDATOR glslangValidator
+  HINTS /usr/bin /usr/local/bin $ENV{VULKAN_SDK}/Bin/ $ENV{VULKAN_SDK}/Bin32/)
 
 ## find all the shader files under the shaders folder
 file(GLOB_RECURSE GLSL_SOURCE_FILES
-    "${PROJECT_SOURCE_DIR}/shaders/*.frag"
-    "${PROJECT_SOURCE_DIR}/shaders/*.vert"
-    "${PROJECT_SOURCE_DIR}/shaders/*.comp"
-    )
+  "${PROJECT_SOURCE_DIR}/shaders/*.frag"
+  "${PROJECT_SOURCE_DIR}/shaders/*.vert"
+  "${PROJECT_SOURCE_DIR}/shaders/*.comp"
+)
 
 ## iterate each shader
 foreach(GLSL ${GLSL_SOURCE_FILES})
@@ -39,6 +39,6 @@ foreach(GLSL ${GLSL_SOURCE_FILES})
 endforeach(GLSL)
 
 add_custom_target(
-    Shaders 
-    DEPENDS ${SPIRV_BINARY_FILES}
-    )
+  Shaders
+  DEPENDS ${SPIRV_BINARY_FILES}
+)
