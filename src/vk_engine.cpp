@@ -1,4 +1,5 @@
-﻿
+﻿#include <iostream>
+
 #include "vk_engine.h"
 
 #include <SDL2/SDL.h>
@@ -51,6 +52,11 @@ void VulkanEngine::run()
 		{
 			//close the window when user alt-f4s or clicks the X button			
 			if (e.type == SDL_QUIT) bQuit = true;
+			
+			const Uint8 *state = SDL_GetKeyboardState(NULL);
+			if (state[SDL_SCANCODE_RETURN]) {
+				std::cout << "<RETURN> is pressed.\n" << std::endl;
+			}
 		}
 
 		draw();
