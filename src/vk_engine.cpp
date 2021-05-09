@@ -9,7 +9,6 @@
 
 void VulkanEngine::init()
 {
-	// We initialize SDL and create a window with it. 
 	SDL_Init(SDL_INIT_VIDEO);
 
 	SDL_WindowFlags window_flags = (SDL_WindowFlags)(SDL_WINDOW_VULKAN);
@@ -36,7 +35,7 @@ void VulkanEngine::cleanup()
 
 void VulkanEngine::draw()
 {
-	//nothing yet
+	
 }
 
 void VulkanEngine::run()
